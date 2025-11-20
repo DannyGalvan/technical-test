@@ -17,8 +17,9 @@ export class ExpedientItemRequest {
     weight: number;
     @IsString()
     location: string;
+    @IsOptional()
     @IsNumber()
-    userId: number;
+    userId?: number;
     @IsBoolean()
     @IsOptional()
     state?: boolean;

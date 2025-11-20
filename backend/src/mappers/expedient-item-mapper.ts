@@ -12,10 +12,10 @@ export const RequestToExpedientItem = (src: ExpedientItemRequest): ExpedientItem
     expedientItem.size = src.size;
     expedientItem.weight = src.weight;
     expedientItem.location = src.location;
-    expedientItem.userId = src.userId;
+    expedientItem.userId = src.userId!;
     expedientItem.state = src.state ?? true;
     expedientItem.createdAt = new Date();
-    expedientItem.createdBy = src.userId;
+    expedientItem.createdBy = src.userId!;
 
     return expedientItem;
 }
@@ -36,8 +36,8 @@ export const ExpedientItemToResponse = (src?: ExpedientItem): any => {
         location: src.location,
         userId: src.userId,
         state: src.state,
-        createdAt: src.createdAt.toISOString(),
-        updatedAt: src.updatedAt?.toISOString(),
+        createdAt: src.createdAt.toLocaleDateString("es-ES", { timeZone: "UTC" }),
+        updatedAt: src.updatedAt?.toLocaleDateString("es-ES", { timeZone: "UTC" }),
         user: UserToResponse(src.user),
     };
 }

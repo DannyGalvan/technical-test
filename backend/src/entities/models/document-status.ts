@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Traceability } from "./traceability";
+import { Expedient } from "./expedient";
 
 @Entity('document-statuses')
 export class DocumentStatus {
@@ -20,4 +21,6 @@ export class DocumentStatus {
 
     @OneToMany(() => Traceability, (traceability) => traceability.documentStatus)
     traceabilities?: Traceability[];
+    @OneToMany(() => Expedient, (expedient) => expedient.documentStatus)
+    expedients?: Expedient[];
 }

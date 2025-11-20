@@ -92,6 +92,9 @@ export class ExpedientController {
     @UseBefore(OperationMiddleware("evidence.create"))
     async create(@Body() expedientData: ExpedientRequest, @CurrentUser() user: JWTPayload) {
         expedientData.userId = user.userId;
+        expedientData.items?.forEach(item => {
+            item.userId = user.userId;
+        });
         const createdExpedient = await this.expedientService.createExpedient(expedientData);
 
         if (!createdExpedient.success) {

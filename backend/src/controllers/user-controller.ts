@@ -176,10 +176,10 @@ export class UserController {
       return error;
     }
 
-    const success: ApiResponse<null> = {
+    const success: ApiResponse<UserResponse | null> = {
       success: true,
       message: deleted.message,
-      data: null,
+      data: deleted.data,
       totalResults: 0,
     };
 

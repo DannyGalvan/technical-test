@@ -18,9 +18,9 @@ export class UserResponse {
     @IsNumber()
     updatedBy?: number;
     @IsString()
-    createdAt?: Date;
+    createdAt?: string;
     @IsString()
-    updatedAt?: Date;
+    updatedAt?: string;
     @ValidateNested()
     @Type(() => RolResponse)
     rol?: RolResponse;

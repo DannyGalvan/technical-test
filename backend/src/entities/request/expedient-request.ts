@@ -7,13 +7,17 @@ export class ExpedientRequest {
     @IsNumber()
     @IsOptional()
     id?: number;
+    @IsOptional()
     @IsNumber()
-    userId: number;
+    userId?: number;
     @IsOptional()
     @IsNumber()
     authorizeUserId?: number;
     @IsString()
     description: string;
+    @IsOptional()
+    @IsNumber()
+    documentStatusId?: number;
     @IsOptional()
     @IsBoolean()
     state?: boolean;

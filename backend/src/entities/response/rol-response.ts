@@ -12,7 +12,7 @@ export class RolResponse {
     @IsNumber()
     updatedBy?: number;
     @IsString()
-    createdAt?: Date;
+    createdAt?: string;
     @IsString()
-    updatedAt?: Date;
+    updatedAt?: string;
 }

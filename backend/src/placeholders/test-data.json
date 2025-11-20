@@ -1,0 +1,16 @@
+{
+    "authorizeUserId": null,
+    "description": "expediente de prueba",
+    "state": true,
+    "items": [
+        {
+            "expedientId": 0,
+            "description": "esta es la primera evidencia",
+            "color": "azul",
+            "size": "grande",
+            "weight": 12.5,
+            "location": "ciudad",
+            "state": true
+        }
+    ]
+}

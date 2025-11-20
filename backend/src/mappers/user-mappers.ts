@@ -15,7 +15,6 @@ export const RequestToUser = (src: UserRequest): User => {
     user.createdBy = src.createdBy!;
     user.updatedBy = src.updatedBy!;
     user.createdAt = new Date();
-    user.updatedAt = new Date();
 
     return user;
 }
@@ -35,8 +34,8 @@ export const UserToResponse = (src?: User): UserResponse => {
         state: src.state,
         createdBy: src.createdBy,
         updatedBy: src.updatedBy,
-        createdAt: src.createdAt,
-        updatedAt: src.updatedAt,
+        createdAt: src.createdAt.toLocaleDateString("es-ES", { timeZone: "UTC" }),
+        updatedAt: src.updatedAt?.toLocaleDateString("es-ES", { timeZone: "UTC" }),
         rol: RolToResponse(src.rol)
     }
 }

@@ -3,7 +3,7 @@ import { RolResponse } from "@/entities/response/rol-response"
 
 
 export const RolToResponse = (src?: Rol): RolResponse | undefined => {
-  
+
     if (!src) return undefined;
 
     return {
@@ -12,7 +12,7 @@ export const RolToResponse = (src?: Rol): RolResponse | undefined => {
         description: src.description,
         createdBy: src.createdBy,
         updatedBy: src.updatedBy,
-        createdAt: src.createdAt,
-        updatedAt: src.updatedAt
+        createdAt: src.createdAt.toLocaleDateString("es-ES", { timeZone: "UTC" }),
+        updatedAt: src.updatedAt?.toLocaleDateString("es-ES", { timeZone: "UTC" }),
     }
 }
