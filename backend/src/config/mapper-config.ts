@@ -1,3 +1,4 @@
+import { DocumentStatusToResponse } from "@/mappers/document-status-mapper";
 import { ModuleToResponse } from "@/mappers/module-mapper";
 import { OperationToResponse } from "@/mappers/operation-mapper";
 import { RolToResponse } from "@/mappers/rol-mapper";
@@ -10,6 +11,7 @@ const MAPPER_TYPES: Record<string, (src: any) => any> = {
     'RolToResponse': RolToResponse,
     'OperationToResponse': OperationToResponse,
     'ModuleToResponse': ModuleToResponse,
+    'DocumentStatusToResponse': DocumentStatusToResponse,
 }
 
 export class AutomapperConfig {

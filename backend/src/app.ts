@@ -16,6 +16,7 @@ import { appDataSource } from "./context/data-source";
 import { AuthController } from "./controllers/auth-controller";
 import { PolicyCacheOperations } from "./config/policy-cache-operations";
 import { Operation } from "./entities/models/operation";
+import { DocumentStatusController } from "./controllers/document-status-controller";
 
 // Setup .env variables
 dotenv.config();
@@ -64,7 +65,7 @@ useContainer(new InversifyAdapter(appContainer));
 
 // Configurar routing-controllers (DESPUÉS de los middlewares básicos)
 useExpressServer(app, {
-  controllers: [AuthController, UserController],
+  controllers: [AuthController, UserController, DocumentStatusController],
   defaultErrorHandler: false,
   validation: true,
   cors: false,

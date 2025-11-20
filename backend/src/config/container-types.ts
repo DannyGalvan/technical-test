@@ -3,10 +3,12 @@ const TYPES = {
     DataSource: Symbol.for("DataSource"),
     // repositories
     UserRepository: Symbol.for("UserRepository"),
+    DocumentStatusRepository: Symbol.for("DocumentStatusRepository"),
     // services
     UserService: Symbol.for("UserService"),
     JWTService: Symbol.for("JWTService"),
     AuthService: Symbol.for("AuthService"),
+    DocumentStatusService: Symbol.for("DocumentStatusService"),
     // mappers
     Mapper: Symbol.for("Mapper"),
     // validations
@@ -16,4 +18,4 @@ const TYPES = {
     RelationLoader: Symbol.for("RelationLoader"),
 };
 
-export { TYPES}
+export { TYPES }
