@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["ES2020"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "rootDir": "./src",  // ⬅️ CAMBIO: apunta solo a src
+    "moduleResolution": "node",
+    "baseUrl": "./",  // ⬅️ Mantén esto para los paths
+    "paths": {
+      "@/*": ["src/*"],
+      "@/middleware/*": ["src/middleware/*"],
+      "@/controllers/*": ["src/controllers/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/entities/*": ["src/entities/*"],
+      "@/config/*": ["src/config/*"],
+      "@/context/*": ["src/context/*"],
+      "@/services/*": ["src/services/*"],
+      "@/repository/*": ["src/repository/*"],
+      "@/mappers/*": ["src/mappers/*"],
+      "@/decorators/*": ["src/decorators/*"],
+      "@/validations/*": ["src/validations/*"],
+      "@/migrations/*": ["src/migrations/*"]
+    },
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": ["src/**/*"],  // ⬅️ CAMBIO: solo incluye src
+  "exclude": ["node_modules", "dist"]
+}

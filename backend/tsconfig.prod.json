@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+    "compilerOptions": {
+    "sourceMap": false,
+    "removeComments": true,
+    "inlineSourceMap": false
+  },
+  "exclude": ["node_modules", "dist", "src/__tests__", "jest.config.ts"]
+}
