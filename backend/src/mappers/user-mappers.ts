@@ -20,7 +20,13 @@ export const RequestToUser = (src: UserRequest): User => {
     return user;
 }
 
-export const UserToResponse = (src: User): UserResponse => {
+export const UserToResponse = (src?: User): UserResponse => {
+
+    if (!src) {
+        return undefined!;
+    }
+
+
     return {
         id: src.id,
         rolId: src.rolId,
