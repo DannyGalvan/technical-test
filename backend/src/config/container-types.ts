@@ -7,6 +7,7 @@ const TYPES = {
     UserRepository: Symbol.for("UserRepository"),
     DocumentStatusRepository: Symbol.for("DocumentStatusRepository"),
     ExpedientRepository: Symbol.for("ExpedientRepository"),
+    TraceabilityRepository: Symbol.for("TraceabilityRepository"),
     // services
     UserService: Symbol.for("UserService"),
     JWTService: Symbol.for("JWTService"),

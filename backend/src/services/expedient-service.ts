@@ -5,6 +5,7 @@ import { ExpedientRequest } from "@/entities/request/expedient-request";
 import { ApiResponseWithErrors } from "@/entities/response/api-response";
 import { ExpedientResponse } from "@/entities/response/expedient-response";
 import { ExpedientRepository } from "@/repository/expedient-repository";
+import { TraceabilityRepository } from "@/repository/traceability-repository";
 import { ExpedientValidations } from "@/validations/expedient-validators/expedient-validations";
 import { inject, injectable } from "inversify";
 import { $ZodIssue } from "zod/v4/core/errors.cjs";
@@ -14,6 +15,7 @@ export class ExpedientService {
 
     constructor(
         @inject(TYPES.ExpedientRepository) private expedientRepository: ExpedientRepository,
+        @inject(TYPES.TraceabilityRepository) private traceabilityRepository: TraceabilityRepository,
         @inject(TYPES.Mapper) private mapper: AutomapperConfig,
         @inject(TYPES.ExpedientValidations) private expedientValidations: ExpedientValidations,
     ) { }
@@ -71,6 +73,17 @@ export class ExpedientService {
 
         const createdExpedient = await this.expedientRepository.save(expedientToCreate);
 
+        await this.traceabilityRepository.create({
+            expedientId: createdExpedient.id,
+            comments: 'Creación de expediente',
+            createdUserId: expedientData.userId!,
+            documentStatusId: createdExpedient.documentStatusId,
+            createdAt: new Date(),
+            createdBy: expedientData.createdBy!,
+            state: true,
+            id: undefined!,
+        });
+
         return {
             data: this.mapper.Map(createdExpedient, "ExpedientToResponse"),
             message: 'Expediente creado exitosamente',
@@ -107,6 +120,21 @@ export class ExpedientService {
                 Error: [{ code: 'invalid_element', message: "Expediente no encontrado", path: "" }],
             };
         }
+
+        await this.traceabilityRepository.inactivateTraces(id)
+
+        await this.traceabilityRepository.create({
+            expedientId: id,
+            comments: expedientData.comments || 'Actualización de expediente',
+            createdUserId: expedientData.userId!,
+            authorizeUserId: expedientData.authorizeUserId,
+            documentStatusId: expedientToUpdate.documentStatusId,
+            createdAt: new Date(),
+            createdBy: expedientData.updatedBy!,
+            state: true,
+            id: undefined!,
+        });
+
 
         return {
             data: this.mapper.Map(updatedExpedient, "ExpedientToResponse"),

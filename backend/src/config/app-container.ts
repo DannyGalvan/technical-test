@@ -21,6 +21,7 @@ import { ExpedientValidations } from "@/validations/expedient-validators/expedie
 import { ExpedientRepository } from "@/repository/expedient-repository";
 import { ExpedientService } from "@/services/expedient-service";
 import { ExpedientController } from "@/controllers/expedient-controller";
+import { TraceabilityRepository } from "@/repository/traceability-repository";
 
 
 const appContainer = new Container();
@@ -32,6 +33,7 @@ appContainer.bind<DataSource>(TYPES.DataSource).toConstantValue(appDataSource);
 appContainer.bind<UserRepository>(TYPES.UserRepository).to(UserRepository);
 appContainer.bind<DocumentStatusRepository>(TYPES.DocumentStatusRepository).to(DocumentStatusRepository);
 appContainer.bind<ExpedientRepository>(TYPES.ExpedientRepository).to(ExpedientRepository);
+appContainer.bind<TraceabilityRepository>(TYPES.TraceabilityRepository).to(TraceabilityRepository);
 
 // Bind services
 appContainer.bind<UserService>(TYPES.UserService).to(UserService);

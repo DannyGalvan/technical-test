@@ -14,9 +14,10 @@ export const RequestToExpedient = (src: ExpedientRequest): Expedient => {
     expedient.description = src.description;
     expedient.state = src.state ?? true;
     expedient.createdAt = new Date();
-    expedient.createdBy = src.userId!;
+    expedient.createdBy = src.createdBy!;
+    expedient.updatedBy = src.updatedBy!;
     expedient.documentStatusId = src.documentStatusId ?? 1;
-    expedient.expedientItems = src.items?.map(item => RequestToExpedientItem(item)) || [];
+    expedient.expedientItems = src.items?.map(item => RequestToExpedientItem(item))
 
     return expedient;
 }

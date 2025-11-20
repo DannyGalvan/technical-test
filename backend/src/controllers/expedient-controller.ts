@@ -9,7 +9,7 @@ import { OperationMiddleware } from "@/middleware/operation-middleware";
 import { ExpedientService } from "@/services/expedient-service";
 import { JWTPayload } from "@/services/jwt-service";
 import { inject, injectable } from "inversify";
-import { Body, Get, JsonController, Param, Post, QueryParam, UseBefore } from "routing-controllers";
+import { Body, Get, JsonController, Param, Post, Put, QueryParam, UseBefore } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 
 @JsonController('/api/evidences')
@@ -18,7 +18,7 @@ import { OpenAPI } from "routing-controllers-openapi";
 export class ExpedientController {
 
     constructor(
-        @inject(TYPES.ExpedientService) private expedientService: ExpedientService,
+        @inject(TYPES.ExpedientService) private expedientService: ExpedientService
     ) { }
 
     @Get('/')
@@ -92,8 +92,10 @@ export class ExpedientController {
     @UseBefore(OperationMiddleware("evidence.create"))
     async create(@Body() expedientData: ExpedientRequest, @CurrentUser() user: JWTPayload) {
         expedientData.userId = user.userId;
+        expedientData.createdBy = user.userId;
         expedientData.items?.forEach(item => {
             item.userId = user.userId;
+            item.createdBy = user.userId;
         });
         const createdExpedient = await this.expedientService.createExpedient(expedientData);
 
@@ -115,6 +117,39 @@ export class ExpedientController {
             totalResults: createdExpedient.totalResults,
         };
 
+        return success;
+    }
+
+    @Put('/:id')
+    @OpenAPI({
+        summary: 'Actualizar un expediente existente',
+        description: 'Permite actualizar los datos de un expediente existente',
+        tags: ['Expedients'],
+    })
+    @UseBefore(OperationMiddleware("evidence.authorize"))
+    async update(@Param("id") id: number, @Body() expedientData: ExpedientRequest, @CurrentUser() user: JWTPayload) {
+        expedientData.userId = user.userId;
+        expedientData.authorizeUserId = user.userId;
+        expedientData.updatedBy = user.userId;
+
+        const updatedExpedient = await this.expedientService.updateExpedient(id, expedientData);
+
+        if (!updatedExpedient.success) {
+            const error: ApiResponse<ErrorApi[]> = {
+                success: false,
+                message: updatedExpedient.message,
+                data: updatedExpedient.Error,
+                totalResults: 0,
+            };
+            return error;
+        }
+
+        const success: ApiResponse<ExpedientResponse | null> = {
+            success: true,
+            message: updatedExpedient.message,
+            data: updatedExpedient.data,
+            totalResults: updatedExpedient.totalResults,
+        };
         return success;
     }
 }

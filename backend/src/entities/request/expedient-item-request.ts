@@ -23,4 +23,10 @@ export class ExpedientItemRequest {
     @IsBoolean()
     @IsOptional()
     state?: boolean;
+    @IsOptional()
+    @IsString()
+    createdBy?: number;
+    @IsOptional()
+    @IsString()
+    updatedBy?: number;
 }

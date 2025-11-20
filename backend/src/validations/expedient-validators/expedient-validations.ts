@@ -14,7 +14,7 @@ const ExpedientItemValidator = object({
 
 
 const CreateExpedientValidator = object({
-    userId: number().int().positive({ message: "El usuario debe ser un número entero positivo" }),
+    userId: number().int().positive({ message: "El usuario debe ser un número entero positivo" }).min(1, { message: "El usuario debe ser al menos 1" }),
     description: string().min(1, { message: "La descripción no puede estar vacía" }),
     state: boolean({ message: "El estado debe ser un valor booleano" }).optional(),
     items: array(ExpedientItemValidator, { message: "El expediente debe contener al menos un ítem" })
@@ -24,9 +24,11 @@ const CreateExpedientValidator = object({
 
 const UpdateExpedientValidator = object({
     id: number().int().positive({ message: "El ID debe ser un número entero positivo" }).min(1, { message: "El ID debe ser al menos 1" }),
-    userId: number().int().positive({ message: "El usuario debe ser un número entero positivo" }),
-    authorizeUserId: number().int().positive({ message: "El usuario autorizado debe ser un número entero positivo" }).optional(),
-    description: string().min(1, { message: "La descripción no puede estar vacía" }),
+    userId: number().int().positive({ message: "El usuario debe ser un número entero positivo" }).min(1, { message: "El usuario debe ser al menos 1" }),
+    comments: string().min(1, { message: "Los comentarios no pueden estar vacíos" }),
+    documentStatusId: number().int().positive({ message: "El estado del documento debe ser un número entero positivo" }).min(1, { message: "El estado del documento debe ser al menos 1" }),
+    authorizeUserId: number().int().positive({ message: "El usuario autorizado debe ser un número entero positivo" }).min(1, { message: "El usuario autorizado debe ser al menos 1" }),
+    description: string().min(1, { message: "La descripción no puede estar vacía" }).optional(),
     state: boolean({ message: "El estado debe ser un valor booleano" }).optional(),
 });
 

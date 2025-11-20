@@ -15,7 +15,8 @@ export const RequestToExpedientItem = (src: ExpedientItemRequest): ExpedientItem
     expedientItem.userId = src.userId!;
     expedientItem.state = src.state ?? true;
     expedientItem.createdAt = new Date();
-    expedientItem.createdBy = src.userId!;
+    expedientItem.createdBy = src.createdBy!;
+    expedientItem.updatedBy = src.updatedBy!;
 
     return expedientItem;
 }

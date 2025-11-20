@@ -6,13 +6,13 @@ import { DocumentStatus } from "./document-status";
 @Entity('traceabilities')
 export class Traceability {
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id?: number;
     @Column('int')
     expedientId: number;
     @Column('int')
     createdUserId: number;
-    @Column('int')
-    authorizeUserId: number;
+    @Column('int', { nullable: true })
+    authorizeUserId?: number;
     @Column('int')
     documentStatusId: number;
     @Column('varchar', { length: 200 })
@@ -30,11 +30,11 @@ export class Traceability {
 
     @ManyToOne(() => User, (user) => user.id)
     @JoinColumn({ name: "createdUserId" })
-    createdUser: User;
+    createdUser?: User;
     @ManyToOne(() => User, (user) => user.id)
     @JoinColumn({ name: "authorizeUserId" })
-    authorizedUser: User;
+    authorizedUser?: User;
     @ManyToOne(() => DocumentStatus, (documentStatus) => documentStatus.id)
     @JoinColumn({ name: "documentStatusId" })
-    documentStatus: DocumentStatus;
+    documentStatus?: DocumentStatus;
 }

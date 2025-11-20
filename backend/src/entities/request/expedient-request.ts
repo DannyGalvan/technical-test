@@ -2,7 +2,6 @@ import { IsArray, IsBoolean, IsNumber, IsOptional, IsString, ValidateNested } fr
 import { ExpedientItemRequest } from "./expedient-item-request";
 import { Type } from "class-transformer";
 
-
 export class ExpedientRequest {
     @IsNumber()
     @IsOptional()
@@ -13,14 +12,24 @@ export class ExpedientRequest {
     @IsOptional()
     @IsNumber()
     authorizeUserId?: number;
+    @IsOptional()
     @IsString()
     description: string;
+    @IsString()
+    @IsOptional()
+    comments?: string;
     @IsOptional()
     @IsNumber()
     documentStatusId?: number;
     @IsOptional()
     @IsBoolean()
     state?: boolean;
+    @IsOptional()
+    @IsString()
+    createdBy?: number;
+    @IsOptional()
+    @IsString()
+    updatedBy?: number;
 
     @IsOptional()
     @ValidateNested({ each: true })

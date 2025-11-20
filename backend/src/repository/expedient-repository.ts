@@ -47,12 +47,13 @@ export class ExpedientRepository {
     }
 
     async update(id: number, expedient: Expedient): Promise<Expedient | null> {
-        this.repository.update(id, expedient);
+        expedient.updatedAt = new Date();
+        await this.repository.update(id, { authorizeUserId: expedient.authorizeUserId, documentStatusId: expedient.documentStatusId, updatedAt: expedient.updatedAt, userId: expedient.userId });
         return this.repository.findOneByOrFail({ id });
     }
 
     async delete(id: number): Promise<Expedient | null> {
-        await this.repository.update(id, { state: false });
+        await this.repository.update(id, { state: false, updatedAt: new Date() });
         return this.repository.findOneByOrFail({ id });
     }
 }
