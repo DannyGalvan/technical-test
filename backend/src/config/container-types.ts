@@ -14,6 +14,7 @@ const TYPES = {
     AuthService: Symbol.for("AuthService"),
     DocumentStatusService: Symbol.for("DocumentStatusService"),
     ExpedientService: Symbol.for("ExpedientService"),
+    TraceabilityService: Symbol.for("TraceabilityService"),
     // mappers
     Mapper: Symbol.for("Mapper"),
     // validations

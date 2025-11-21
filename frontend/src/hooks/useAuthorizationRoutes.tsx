@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router";
 import { nameRoutes } from "../configs/constants";
 import { Root } from "../containers/Root";
 import { ErrorRoutes } from "../routes/ErrorRoutes";
+import { EvidenceRoutes } from "../routes/EvidenceRoutes";
 import { PublicRoutes } from "../routes/PublicRoutes";
 import { useAuth } from "./useAuth";
 
@@ -13,7 +14,7 @@ export const useAuthorizationRoutes = () => {
     {
       path: nameRoutes.root,
       element: <Root />,
-      children: [],
+      children: [...EvidenceRoutes],
     },
     {
       path: nameRoutes.root,

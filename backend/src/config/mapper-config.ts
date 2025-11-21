@@ -4,6 +4,7 @@ import { ExpedientToResponse, RequestToExpedient } from "@/mappers/expedient-map
 import { ModuleToResponse } from "@/mappers/module-mapper";
 import { OperationToResponse } from "@/mappers/operation-mapper";
 import { RolToResponse } from "@/mappers/rol-mapper";
+import { TraceabilityToResponse } from "@/mappers/traceability-mapper";
 import { RequestToUser, UserToResponse, UserToUser } from "@/mappers/user-mappers";
 
 const MAPPER_TYPES: Record<string, (src: any) => any> = {
@@ -18,6 +19,7 @@ const MAPPER_TYPES: Record<string, (src: any) => any> = {
     'RequestToExpedientItem': RequestToExpedientItem,
     'ExpedientItemToResponse': ExpedientItemToResponse,
     'ExpedientToResponse': ExpedientToResponse,
+    'TraceabilityToResponse': TraceabilityToResponse,
 }
 
 export class AutomapperConfig {

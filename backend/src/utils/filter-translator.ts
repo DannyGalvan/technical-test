@@ -113,15 +113,26 @@ export class FilterTranslator {
     const params: Record<string, any> = {};
     let conditionExpr: string;
 
+    const isNullLiteral =
+      rawValue.toUpperCase() === "NULL" || rawValue === "";
+
     switch (op) {
       case "eq":
-        conditionExpr = `${fieldExpression} = :${paramName}`;
-        params[paramName] = rawValue;
+        if (isNullLiteral) {
+          conditionExpr = `${fieldExpression} IS NULL`;
+        } else {
+          conditionExpr = `${fieldExpression} = :${paramName}`;
+          params[paramName] = rawValue;
+        }
         break;
 
       case "ne":
-        conditionExpr = `${fieldExpression} <> :${paramName}`;
-        params[paramName] = rawValue;
+        if (isNullLiteral) {
+          conditionExpr = `${fieldExpression} IS NOT NULL`;
+        } else {
+          conditionExpr = `${fieldExpression} <> :${paramName}`;
+          params[paramName] = rawValue;
+        }
         break;
 
       case "gt":
@@ -174,7 +185,7 @@ export class FilterTranslator {
     return {
       condition: conditionExpr,
       params,
-      nextIndex: paramIndex + 1,
+      nextIndex: isNullLiteral ? paramIndex : paramIndex + 1,
     };
   }
 }

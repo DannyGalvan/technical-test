@@ -8,7 +8,6 @@ import { AuthMiddleware } from "@/middleware/auth-middleware";
 import { OperationMiddleware } from "@/middleware/operation-middleware";
 import { ExpedientService } from "@/services/expedient-service";
 import { JWTPayload } from "@/services/jwt-service";
-import { QueryParamsRequest } from "@/types/types/types.common";
 import { inject, injectable } from "inversify";
 import { Body, Get, JsonController, Param, Post, Put, QueryParam, UseBefore } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";

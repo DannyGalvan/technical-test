@@ -22,6 +22,8 @@ import { ExpedientRepository } from "@/repository/expedient-repository";
 import { ExpedientService } from "@/services/expedient-service";
 import { ExpedientController } from "@/controllers/expedient-controller";
 import { TraceabilityRepository } from "@/repository/traceability-repository";
+import { TraceabilityService } from "@/services/traceability-service";
+import { TraceabilityController } from "@/controllers/traceability-controller";
 
 
 const appContainer = new Container();
@@ -41,12 +43,14 @@ appContainer.bind<JWTService>(TYPES.JWTService).to(JWTService);
 appContainer.bind<AuthService>(TYPES.AuthService).to(AuthService);
 appContainer.bind<DocumentStatusService>(TYPES.DocumentStatusService).to(DocumentStatusService);
 appContainer.bind<ExpedientService>(TYPES.ExpedientService).to(ExpedientService);
+appContainer.bind<TraceabilityService>(TYPES.TraceabilityService).to(TraceabilityService);
 
 // Bind controllers
 appContainer.bind<UserController>(UserController).toSelf().inSingletonScope();
 appContainer.bind<AuthController>(AuthController).toSelf().inSingletonScope();
 appContainer.bind<DocumentStatusController>(DocumentStatusController).toSelf().inSingletonScope();
 appContainer.bind<ExpedientController>(ExpedientController).toSelf().inSingletonScope();
+appContainer.bind<TraceabilityController>(TraceabilityController).toSelf().inSingletonScope();
 
 // Bind Middlewares
 appContainer.bind<AuthMiddleware>(AuthMiddleware).toSelf();

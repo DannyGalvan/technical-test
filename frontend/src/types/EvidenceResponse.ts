@@ -1,5 +1,6 @@
 import type { DocumentStatusResponse } from "./DocumentStatusResponse";
 import type { EvidenceItemResponse } from "./EvidenceItemResponse";
+import type { UserResponse } from "./UserResponse";
 
 export interface EvidenceResponse {
   id: number;
@@ -10,6 +11,10 @@ export interface EvidenceResponse {
   createAt: string;
   updateAt: string;
   documentStatusId: number;
-  items: EvidenceItemResponse[];
-  documentStatus: DocumentStatusResponse;
+  createdAt: string;
+  updatedAt: string;
+  items?: EvidenceItemResponse[];
+  authorizeUser?: UserResponse;
+  user?: UserResponse;
+  documentStatus?: DocumentStatusResponse;
 }

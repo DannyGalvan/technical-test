@@ -11,12 +11,14 @@ export const nameRoutes = {
   register: "/register",
   changePassword: "/change-password",
   settings: "/change-password",
+  evidence: "/evidences",
   root: "/",
   notFound: "*",
   forbidden: "/forbidden",
   unauthorized: "/unauthorized",
   error: "/error",
   create: "create",
+  authorize: "authorize",
 };
 
 export const authInitialState: InitialAuth = {
@@ -47,4 +49,10 @@ export const MULTIPART_HEADERS = {
   headers: {
     "Content-Type": "multipart/form-data",
   },
+};
+
+export const AUTHORIZATION_STATES = {
+  pendient: 1,
+  authorized: 2,
+  rejected: 3,
 };
