@@ -12,7 +12,7 @@ export const getRolOperations = async ({
   include,
   includeTotal = false,
 }: filterOptions): Promise<ApiResponse<RolOperationResponse[]>> => {
-  let baseQuery = `RolOperation?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+  let baseQuery = `rol-operations?pageNumber=${pageNumber}&pageSize=${pageSize}`;
 
   if (filters) {
     baseQuery += `&filters=${encodeURIComponent(filters)}`;
@@ -34,7 +34,7 @@ export const getOperations = async ({
   include,
   includeTotal = false,
 }: filterOptions): Promise<ApiResponse<OperationResponse[]>> => {
-  let baseQuery = `RolOperation/Operation?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+  let baseQuery = `rol-operations/operations?pageNumber=${pageNumber}&pageSize=${pageSize}`;
 
   if (filters) {
     baseQuery += `&filters=${encodeURIComponent(filters)}`;
@@ -54,7 +54,7 @@ export const createRolOperation = async (rolOperation: RolOperationRequest) => {
     unknown,
     ApiResponse<RolOperationResponse>,
     RolOperationRequest
-  >("RolOperation", rolOperation);
+  >("rol-operations", rolOperation);
 };
 
 export const updateRolOperation = async (rolOperation: RolOperationRequest) => {
@@ -62,5 +62,5 @@ export const updateRolOperation = async (rolOperation: RolOperationRequest) => {
     unknown,
     ApiResponse<RolOperationResponse>,
     RolOperationRequest
-  >(`RolOperation/${rolOperation.id}`, rolOperation);
+  >(`rol-operations/${rolOperation.id}`, rolOperation);
 };

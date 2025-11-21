@@ -28,7 +28,7 @@ export function OperationButton({ data }: OperationButtonProps) {
     queryKey: ["operationsForRol", id],
     queryFn: async () =>
       getRolOperations({
-        filters: `RolId:eq:${id}`,
+        filters: `rolId:eq:${id} AND state:eq:1`,
         pageNumber: 1,
         pageSize: 1000,
         include: null,
@@ -91,6 +91,7 @@ export function OperationButton({ data }: OperationButtonProps) {
       id: null,
       rolId: Number(id),
       operationId: data.id,
+      state: 1,
     });
 
     if (response.success) {
@@ -114,6 +115,7 @@ export function OperationButton({ data }: OperationButtonProps) {
 
   return (
     <Button
+      key={`op-${hasPermission}-${data.id}`}
       className={hasPermission ? "text-white" : ""}
       color={hasPermission ? "danger" : "success"}
       size="sm"

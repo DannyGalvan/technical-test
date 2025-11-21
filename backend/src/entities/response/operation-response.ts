@@ -1,4 +1,5 @@
 import { IsBoolean, IsNumber, IsString } from "class-validator";
+import { ModuleResponse } from "./module-response";
 
 export class OperationResponse {
     @IsNumber()
@@ -17,4 +18,6 @@ export class OperationResponse {
     path!: string;
     @IsBoolean()
     isVisible!: boolean;
+
+    module?: ModuleResponse;
 }

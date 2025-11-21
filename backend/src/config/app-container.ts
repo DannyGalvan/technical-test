@@ -28,6 +28,10 @@ import { RolRepository } from "@/repository/rol-repository";
 import { RolValidations } from "@/validations/rol-validators/rol-validations";
 import { RolController } from "@/controllers/rol-controller";
 import { RolService } from "@/services/rol-service";
+import { RolOperationRepository } from "@/repository/rol-operation-repository";
+import { RolOperationValidations } from "@/validations/rol-operation-validators/rol-operation-validations";
+import { RolOperationService } from "@/services/rol-operation-service";
+import { RolOperationController } from "@/controllers/rol-operation-controller";
 
 
 const appContainer = new Container();
@@ -41,6 +45,7 @@ appContainer.bind<DocumentStatusRepository>(TYPES.DocumentStatusRepository).to(D
 appContainer.bind<ExpedientRepository>(TYPES.ExpedientRepository).to(ExpedientRepository);
 appContainer.bind<TraceabilityRepository>(TYPES.TraceabilityRepository).to(TraceabilityRepository);
 appContainer.bind<RolRepository>(TYPES.RolRepository).to(RolRepository);
+appContainer.bind<RolOperationRepository>(TYPES.RolOperationRepository).to(RolOperationRepository);
 
 // Bind services
 appContainer.bind<UserService>(TYPES.UserService).to(UserService);
@@ -50,6 +55,7 @@ appContainer.bind<DocumentStatusService>(TYPES.DocumentStatusService).to(Documen
 appContainer.bind<ExpedientService>(TYPES.ExpedientService).to(ExpedientService);
 appContainer.bind<TraceabilityService>(TYPES.TraceabilityService).to(TraceabilityService);
 appContainer.bind<RolService>(TYPES.RolService).to(RolService);
+appContainer.bind<RolOperationService>(TYPES.RolOperationService).to(RolOperationService);
 
 // Bind controllers
 appContainer.bind<UserController>(UserController).toSelf().inSingletonScope();
@@ -58,6 +64,7 @@ appContainer.bind<DocumentStatusController>(DocumentStatusController).toSelf().i
 appContainer.bind<ExpedientController>(ExpedientController).toSelf().inSingletonScope();
 appContainer.bind<TraceabilityController>(TraceabilityController).toSelf().inSingletonScope();
 appContainer.bind<RolController>(RolController).toSelf().inSingletonScope();
+appContainer.bind<RolOperationController>(RolOperationController).toSelf().inSingletonScope();
 
 // Bind Middlewares
 appContainer.bind<AuthMiddleware>(AuthMiddleware).toSelf();
@@ -66,6 +73,7 @@ appContainer.bind<AuthMiddleware>(AuthMiddleware).toSelf();
 appContainer.bind<UserValidations>(TYPES.UserValidations).to(UserValidations);
 appContainer.bind<ExpedientValidations>(TYPES.ExpedientValidations).to(ExpedientValidations);
 appContainer.bind<RolValidations>(TYPES.RolValidations).to(RolValidations);
+appContainer.bind<RolOperationValidations>(TYPES.RolOperationValidations).to(RolOperationValidations);
 
 // Bind mappers
 appContainer.bind<AutomapperConfig>(TYPES.Mapper).to(AutomapperConfig);

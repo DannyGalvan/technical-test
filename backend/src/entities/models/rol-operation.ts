@@ -12,7 +12,7 @@ export class RolOperation {
     @Column({ type: 'int' })
     operationId: number;
     @Column({ type: 'bit' })
-    state: boolean;
+    state: number;
     @Column({ type: 'datetime2' })
     createdAt: Date;
     @Column({ type: 'datetime2', nullable: true })

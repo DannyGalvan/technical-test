@@ -5,7 +5,7 @@ export interface RolOperationResponse {
   id: number;
   rolId: number;
   operationId: number;
-  state: number;
+  state: boolean;
   createdAt: string;
   createdBy: number;
   updatedBy?: number;

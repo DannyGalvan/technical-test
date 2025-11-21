@@ -1,5 +1,3 @@
-import { Expedient } from "@/entities/models/expedient";
-
 const TYPES = {
     // data source
     DataSource: Symbol.for("DataSource"),
@@ -9,6 +7,7 @@ const TYPES = {
     ExpedientRepository: Symbol.for("ExpedientRepository"),
     TraceabilityRepository: Symbol.for("TraceabilityRepository"),
     RolRepository: Symbol.for("RolRepository"),
+    RolOperationRepository: Symbol.for("RolOperationRepository"),
     // services
     UserService: Symbol.for("UserService"),
     JWTService: Symbol.for("JWTService"),
@@ -17,12 +16,14 @@ const TYPES = {
     ExpedientService: Symbol.for("ExpedientService"),
     TraceabilityService: Symbol.for("TraceabilityService"),
     RolService: Symbol.for("RolService"),
+    RolOperationService: Symbol.for("RolOperationService"),
     // mappers
     Mapper: Symbol.for("Mapper"),
     // validations
     UserValidations: Symbol.for("UserValidations"),
     ExpedientValidations: Symbol.for("ExpedientValidations"),
     RolValidations: Symbol.for("RolValidations"),
+    RolOperationValidations: Symbol.for("RolOperationValidations"),
     //utils
     FilterTranslator: Symbol.for("FilterTranslator"),
     RelationLoader: Symbol.for("RelationLoader"),

@@ -119,7 +119,7 @@ export class UserRepository {
     }
 
     const rolOperations: RolOperation[] = await this.dataSource.getRepository(RolOperation).find({
-      where: { rolId: user.rol!.id, state: true },
+      where: { rolId: user.rol!.id, state: 1 },
       relations: ["operation"]
     });
 

@@ -1,5 +1,6 @@
 import { Operation } from "@/entities/models/operation";
 import { OperationResponse } from "@/entities/response/operation-response";
+import { ModuleToResponse } from "./module-mapper";
 
 
 export const OperationToResponse = (src?: Operation): OperationResponse | undefined => {
@@ -14,6 +15,7 @@ export const OperationToResponse = (src?: Operation): OperationResponse | undefi
         icon: src.icon,
         guid: src.guid,
         policy: src.policy,
-        isVisible: src.isVisible
+        isVisible: src.isVisible,
+        module: ModuleToResponse(src.module),
     }
 }
