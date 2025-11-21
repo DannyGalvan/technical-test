@@ -44,7 +44,7 @@ export function UserForm({ initialForm, type, onSubmit }: UserFormProps) {
 
   const selectorRol = useCallback(
     (item: RolResponse) => ({
-      label: item.description,
+      label: item.name,
       value: String(item.id),
     }),
     [],

@@ -76,6 +76,9 @@ export class UserRepository {
 
   async update(id: number, userData: Partial<User>): Promise<User | null> {
     userData.updatedAt = new Date();
+    userData.id = undefined;
+    userData.createdAt = undefined;
+    userData.createdBy = undefined;
     await this.repository.update(id, userData);
     return this.findById(id);
   }

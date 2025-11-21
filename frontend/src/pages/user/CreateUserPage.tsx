@@ -11,6 +11,7 @@ export function CreateUserPage() {
 
   const onSubmit = useCallback(
     async (form: UserRequest) => {
+      form.rolId = Number(form.rolId);
       const response = await createUser(form);
 
       if (!response.success) {

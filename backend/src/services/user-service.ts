@@ -105,7 +105,13 @@ export class UserService {
 
     const createdUser = await this.userRepository.create(userEntity);
 
-    return this.mapper.Map(createdUser, "UserToResponse");
+    return {
+      data: this.mapper.Map(createdUser, "UserToResponse"),
+      message: 'Usuario creado exitosamente',
+      success: true,
+      totalResults: 1,
+      Error: [],
+    }
   }
 
   async updateUser(id: number, userData: UserRequest): Promise<ApiResponseWithErrors<UserResponse>> {

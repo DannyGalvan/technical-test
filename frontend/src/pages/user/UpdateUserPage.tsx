@@ -24,6 +24,7 @@ export function UpdateUserPage() {
   const onSubmit = useCallback(
     async (form: UserRequest) => {
       form.createdBy = null;
+      form.rolId = Number(form.rolId);
       const response = await updateUser(form);
 
       if (!response.success) {

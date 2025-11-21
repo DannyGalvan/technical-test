@@ -19,6 +19,7 @@ import { Operation } from "./entities/models/operation";
 import { DocumentStatusController } from "./controllers/document-status-controller";
 import { ExpedientController } from "./controllers/expedient-controller";
 import { TraceabilityController } from "./controllers/traceability-controller";
+import { RolController } from "./controllers/rol-controller";
 
 // Setup .env variables
 dotenv.config();
@@ -67,7 +68,7 @@ useContainer(new InversifyAdapter(appContainer));
 
 // Configurar routing-controllers (DESPUÉS de los middlewares básicos)
 useExpressServer(app, {
-  controllers: [AuthController, UserController, DocumentStatusController, ExpedientController, TraceabilityController],
+  controllers: [AuthController, UserController, DocumentStatusController, ExpedientController, TraceabilityController, RolController],
   defaultErrorHandler: false,
   validation: true,
   cors: false,

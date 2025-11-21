@@ -3,7 +3,7 @@ import { ExpedientItemToResponse, RequestToExpedientItem } from "@/mappers/exped
 import { ExpedientToResponse, RequestToExpedient } from "@/mappers/expedient-mapper";
 import { ModuleToResponse } from "@/mappers/module-mapper";
 import { OperationToResponse } from "@/mappers/operation-mapper";
-import { RolToResponse } from "@/mappers/rol-mapper";
+import { RequestToRol, RolToResponse } from "@/mappers/rol-mapper";
 import { TraceabilityToResponse } from "@/mappers/traceability-mapper";
 import { RequestToUser, UserToResponse, UserToUser } from "@/mappers/user-mappers";
 
@@ -12,6 +12,7 @@ const MAPPER_TYPES: Record<string, (src: any) => any> = {
     'UserToResponse': UserToResponse,
     'UserToUser': UserToUser,
     'RolToResponse': RolToResponse,
+    'RequestToRol': RequestToRol,
     'OperationToResponse': OperationToResponse,
     'ModuleToResponse': ModuleToResponse,
     'DocumentStatusToResponse': DocumentStatusToResponse,

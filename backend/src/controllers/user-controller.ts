@@ -137,7 +137,7 @@ export class UserController {
     description: 'Permite actualizar los datos de un usuario registrado',
     tags: ['Users'],
   })
-  @UseBefore(OperationMiddleware("user.update"))
+  @UseBefore(OperationMiddleware("user.edit"))
   async update(@Param("id") id: number, @Body() userData: UserRequest, @CurrentUser() user: JWTPayload) {
     userData.updatedBy = user.userId;
     const userExist = await this.userService.updateUser(id, userData);
