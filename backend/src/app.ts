@@ -40,7 +40,7 @@ app.use(helmet());
 
 // 2. CORS
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
   credentials: true,
 }));
 
