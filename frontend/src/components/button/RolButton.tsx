@@ -8,18 +8,18 @@ import {
 
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
-import type { UserResponse } from "../../types/UserResponse";
+import type { RolResponse } from "../../types/RolResponse";
 import { Icon } from "../icons/Icon";
 
-interface UserButtonProps {
-  readonly data: UserResponse;
+interface RolButtonProps {
+  readonly data: RolResponse;
 }
 
-export function UserButton({ data }: UserButtonProps) {
+export function RolButton({ data }: RolButtonProps) {
   const navigate = useNavigate();
 
   const handleEdit = useCallback(() => {
-    navigate(`/users/edit/${data.id}`);
+    navigate(`/roles/edit/${data.id}`);
   }, [navigate, data.id]);
 
   return (

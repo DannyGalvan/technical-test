@@ -1,19 +1,18 @@
 import { addToast } from "@heroui/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
-import { UserForm } from "../../components/form/UserForm";
-import { initialUser } from "../../configs/constants";
-import { createUser } from "../../services/userService";
-import type { UserRequest } from "../../types/UserRequest";
+import { RolForm } from "../../components/form/RolForm";
+import { initialRol } from "../../configs/constants";
+import { createRol } from "../../services/rolService";
+import type { RolRequest } from "../../types/RolRequest";
 import { validationFailureToString } from "../../utils/converted";
 
-export function CreateUserPage() {
+export function CreateRolPage() {
   const client = useQueryClient();
 
   const onSubmit = useCallback(
-    async (form: UserRequest) => {
-      form.rolId = Number(form.rolId);
-      const response = await createUser(form);
+    async (form: RolRequest) => {
+      const response = await createRol(form);
 
       if (!response.success) {
         addToast({
@@ -24,11 +23,11 @@ export function CreateUserPage() {
         return response;
       }
 
-      await client.invalidateQueries({ queryKey: ["users"] });
+      await client.invalidateQueries({ queryKey: ["rols"] });
 
       addToast({
         title: "Success",
-        description: "Usuario creado correctamente",
+        description: "Rol creado correctamente",
         color: "success",
       });
 
@@ -39,8 +38,8 @@ export function CreateUserPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center mb-4">Crear Usuario</h1>
-      <UserForm initialForm={initialUser} type="create" onSubmit={onSubmit} />
+      <h1 className="text-2xl font-bold text-center mb-4">Crear Rol</h1>
+      <RolForm initialForm={initialRol} type="create" onSubmit={onSubmit} />
     </div>
   );
 }

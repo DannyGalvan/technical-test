@@ -1,4 +1,4 @@
-import Module from "module";
+import type { Module } from "./Module";
 
 export interface Operations {
   id: string;

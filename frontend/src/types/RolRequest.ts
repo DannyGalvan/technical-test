@@ -3,4 +3,8 @@ export interface RolRequest {
   name: string;
   description: string;
   state: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: number;
+  updatedBy?: number;
 }

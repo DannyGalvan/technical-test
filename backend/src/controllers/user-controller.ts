@@ -76,8 +76,8 @@ export class UserController {
     tags: ['Users'],
   })
   @UseBefore(OperationMiddleware("user.view"))
-  async getById(@Param("id") id: number) {
-    const user = await this.userService.getUserById(id);
+  async getById(@Param("id") id: number, @QueryParam("relations") relations?: string) {
+    const user = await this.userService.getUserById(id, relations);
 
     if (!user) {
       const error: ApiResponse<ErrorApi[]> = {

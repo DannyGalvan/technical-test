@@ -15,13 +15,14 @@ export const nameRoutes = {
   settings: "/change-password",
   evidence: "/evidences",
   user: "/users",
+  rol: "/roles",
   root: "/",
   notFound: "*",
   forbidden: "/forbidden",
   unauthorized: "/unauthorized",
   error: "/error",
   create: "create",
-  edit: "update",
+  edit: "edit",
   authorize: "authorize",
 };
 
@@ -70,8 +71,8 @@ export const initialUser: UserRequest = {
   state: true,
 };
 
-export const rol: RolRequest = {
-  id: 0,
+export const initialRol: RolRequest = {
+  id: undefined,
   name: "",
   description: "",
   state: true,

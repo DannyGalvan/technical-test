@@ -1,6 +1,6 @@
 import { RolRequest } from "@/entities/request/rol-request";
 import { injectable } from "inversify";
-import { object, string } from "zod";
+import { number, object, string } from "zod";
 
 
 const CreateRolValidator = object({
@@ -9,7 +9,7 @@ const CreateRolValidator = object({
 });
 
 const UpdateRolValidator = object({
-    id: string().min(1, { message: "El id del rol es obligatorio" }),
+    id: number().min(1, { message: "El id del rol es obligatorio" }),
     name: string().min(2, { message: "El nombre del rol debe tener al menos 2 caracteres" }).optional(),
     description: string().min(5, { message: "La descripción del rol debe tener al menos 5 caracteres" }).optional(),
 });

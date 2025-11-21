@@ -31,8 +31,8 @@ export class UserService {
     }
   }
 
-  async getUserById(id: number): Promise<ApiResponseWithErrors<UserResponse>> {
-    const user = await this.userRepository.findById(id);
+  async getUserById(id: number, relations?: string): Promise<ApiResponseWithErrors<UserResponse>> {
+    const user = await this.userRepository.findById(id, relations);
 
     if (!user) {
       return {

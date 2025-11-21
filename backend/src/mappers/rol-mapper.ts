@@ -27,7 +27,7 @@ export const RequestToRol = (src: RolRequest): Rol => {
     rol.state = src.state!;
     rol.createdBy = src.createdBy!;
     rol.updatedBy = src.updatedBy!;
-
+    rol.createdAt = new Date();
 
     return rol;
 }

@@ -61,8 +61,11 @@ export class UserRepository {
         };
   }
 
-  async findById(id: number): Promise<User | null> {
-    return this.repository.findOne({ where: { id } });
+  async findById(id: number, relations?: string): Promise<User | null> {
+     const qb = this.repository.createQueryBuilder("user");
+        qb.where("user.id = :id", { id });
+        this.relationLoader.applyRelations(qb, "user", relations);
+        return qb.getOne();
   }
 
   async findByEmail(email: string): Promise<User | null> {

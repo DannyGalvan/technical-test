@@ -4,7 +4,7 @@ export interface RolResponse {
   id: number;
   name: string;
   description: string;
-  state: number;
+  state: boolean;
   createdAt: string;
   createdBy: number;
   updatedBy?: number;
