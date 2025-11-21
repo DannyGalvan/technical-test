@@ -1,0 +1,31 @@
+# ------------ Fase de construcción (Builder) ------------
+# Usa una imagen base de Node.js con una etiqueta específica
+FROM node:20-alpine AS builder
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia los archivos package.json y package-lock.json
+COPY package*.json ./
+
+# Instala las dependencias de producción
+RUN npm install
+
+# Copia el resto del código de la aplicación
+COPY . .
+
+# Compila la aplicación para producción
+RUN npm run build
+
+# ------------ Fase de producción (Producción) ------------
+# Usa una imagen base ligera con un servidor web como Nginx
+FROM nginx:stable-alpine
+
+# Copia los archivos de la compilación de React desde la fase 'builder' al directorio web de Nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Expone el puerto 80, que Nginx utiliza por defecto
+EXPOSE 80
+
+# Comando para iniciar Nginx al ejecutar el contenedor
+CMD ["nginx", "-g", "daemon off;"]

@@ -13,6 +13,8 @@ services:
     volumes:
       - mssql-data:/var/opt/mssql # Persist data in a named volume
     restart: unless-stopped # Restart the container unless explicitly stopped
+    networks:
+      - default
 
   app:
     build:
@@ -37,6 +39,26 @@ services:
     depends_on:
       - mssql # Ensure the database starts before the app
     restart: unless-stopped # Restart the container unless explicitly stopped
+    networks:
+      - default
+
+  frontend:
+      build:
+        context: ./frontend
+        dockerfile: dockerfile
+      container_name: mp-frontend
+      environment:
+        - REACT_APP_API_URL=http://localhost:3000
+      ports:
+        - "3001:80" # Maps host port 8080 to container port 80
+      depends_on:
+        - app # Ensure the backend starts before the frontend
+      restart: unless-stopped # Restart the container unless explicitly stopped
+      networks:
+        - default
 
 volumes:
   mssql-data: # Define the named volume for data persistence
+networks:
+  default:
+    driver: bridge

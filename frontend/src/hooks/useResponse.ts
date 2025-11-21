@@ -14,7 +14,7 @@ export const useResponse = <T>() => {
     const errorsConverted: ErrorObject = {};
 
     errors.forEach((error) => {
-      errorsConverted[toCamelCase(error.propertyName)] = error.errorMessage;
+      errorsConverted[toCamelCase(error.path)] = error.message;
     });
 
     if (Object.keys(errorsConverted).length !== 0) {
