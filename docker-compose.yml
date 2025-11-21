@@ -32,7 +32,7 @@ services:
       - DB_NAME=mp # Replace with your actual database name
       - JWT_SECRET=tu-super-secreto-en-produccion
       - JWT_EXPIRES_IN=7d
-      - CORS_ORIGIN=http://localhost:3001
+      - CORS_ORIGIN=*
       - NODE_ENV=production
     ports:
       - "3000:3000" # Maps host port 3000 to container port 3000

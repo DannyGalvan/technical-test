@@ -2,7 +2,7 @@ import type { InitialAuth } from "../types/InitialAuth";
 import type { RolRequest } from "../types/RolRequest";
 import type { UserRequest } from "../types/UserRequest";
 
-export const URL_BASE = "http://app";
+export const URL_BASE = "http://app:3000";
 export const API_URL = `${URL_BASE}/api`;
 
 export const invalid_type_error = "El tipo provisto es invalido";
