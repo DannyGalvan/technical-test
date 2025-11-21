@@ -18,7 +18,7 @@ export const useForm = <T, U>(
     form: T,
     transformData: (data: SetStateAction<T>) => void,
   ) => ErrorObject,
-  peticion: (form: T) => Promise<ApiResponse<U>>,
+  peticion: (form: T) => Promise<ApiResponse<U>> | ApiResponse<U>,
   reboot?: boolean,
 ) => {
   const { setError } = useErrorsStore();

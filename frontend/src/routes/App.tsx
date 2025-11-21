@@ -1,4 +1,5 @@
 import { HeroUIProvider } from "@heroui/system";
+import { ToastProvider } from "@heroui/toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazy, useEffect } from "react";
@@ -40,6 +41,11 @@ function App() {
   return (
     <ErrorBoundary>
       <HeroUIProvider locale="es-ES">
+        <ToastProvider
+          placement="top-right"
+          toastOffset={60}
+          toastProps={{ shadow: "md" }}
+        />
         <QueryClientProvider client={client}>
           {loading ? <LoadingPage /> : <LazyAppRoutes />}
           <ReactQueryDevtools initialIsOpen={false} />

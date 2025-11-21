@@ -13,14 +13,14 @@ export interface AuthResponse {
 
 export type ApiResponse<T> =
   | {
-    success: true;
-    data: T;
-    message: string;
-    totalResults: number;
-  }
+      success: true;
+      data: T;
+      message: string;
+      totalResults: number;
+    }
   | {
-    success: false;
-    data: ValidationFailure[] | null;
-    message: string;
-    totalResults: number;
-  };
+      success: false;
+      data: ValidationFailure[] | null;
+      message: string;
+      totalResults: number;
+    };

@@ -122,9 +122,7 @@ export const validationFailureToString = (
 ) => {
   if (!errors) return "";
 
-  return errors
-    .map((error) => `${error.propertyName}: ${error.errorMessage}`)
-    .join(", ");
+  return errors.map((error) => `${error.path}: ${error.message}`).join(", ");
 };
 
 export const errorObjectToString = (errorObject?: ErrorObject) => {
@@ -148,7 +146,7 @@ export const mapValidationFailuresToFieldErrors = (
   }
 
   errors.forEach((error) => {
-    errorsConverted[toCamelCase(error.propertyName)] = error.errorMessage;
+    errorsConverted[toCamelCase(error.path)] = error.message;
   });
 
   if (Object.keys(errorsConverted).length !== 0) {

@@ -121,8 +121,8 @@ export function Sidebar() {
             <li>
               <Link
                 viewTransition
-                className={`link ${pathname === nameRoutes.root ? "active" : ""}`}
-                to={nameRoutes.root}
+                className={`link ${pathname === nameRoutes.evidence ? "active" : ""}`}
+                to={nameRoutes.evidence}
               >
                 <Icon name="bi bi-house-door-fill" size={23} />
                 Home
