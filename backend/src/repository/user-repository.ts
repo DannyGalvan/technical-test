@@ -6,8 +6,9 @@ import { Operation } from "@/entities/models/operation";
 import { RolOperation } from "@/entities/models/rol-operation";
 import { User } from "@/entities/models/user";
 import { AuthResponse } from "@/entities/request/auth-response";
-import { ApiResponseWithErrors } from "@/entities/response/api-response";
+import { ApiResponse, ApiResponseWithErrors } from "@/entities/response/api-response";
 import { Authorizations } from "@/entities/response/autorizations-response";
+import { QueryParamsRequest } from "@/types/types/types.common";
 import { FilterTranslator } from "@/utils/filter-translator";
 import { RelationLoader } from "@/utils/relation-loader";
 
@@ -31,11 +32,33 @@ export class UserRepository {
     this.moduleRepository = this.dataSource.getRepository(Module);
   }
 
-  async findAll(filters: string, relations: string): Promise<User[]> {
-    const qb = this.repository.createQueryBuilder("User");
-    this.filterTranslator.applyFilter(qb, "User", filters);
-    this.relationLoader.applyRelations(qb, "User", relations);
-    return qb.getMany();
+  async findAll({filters, relations, pageNumber = 1, pageSize = 10, includeTotal = false} : QueryParamsRequest): Promise<ApiResponse<User[]>> {
+    const qb = this.repository.createQueryBuilder("user");
+        this.filterTranslator.applyFilter(qb, "user", filters);
+        this.relationLoader.applyRelations(qb, "user", relations);
+
+        qb.orderBy("user.id", "DESC");
+
+        const skip = (pageNumber - 1) * pageSize;
+        const pagedData = await qb.skip(skip).take(pageSize).getMany();
+
+        if (includeTotal) {
+            const [result, total] = await qb.getManyAndCount();
+            // You can return total count along with results if needed
+            return {
+                data: result,
+                totalResults: total,
+                message: "Expedients retrieved successfully",
+                success: true,
+            }
+        }
+
+        return {
+            data: pagedData,
+            message: "Expedients retrieved successfully",
+            success: true,
+            totalResults: skip + pagedData.length + (pagedData.length > pageSize ? 1 : 0), // Approximate total
+        };
   }
 
   async findById(id: number): Promise<User | null> {

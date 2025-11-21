@@ -30,7 +30,7 @@ const appDataSource = new DataSource({
         DocumentStatus,
         Traceability,
     ],
-    migrations: ["src/migrations/**/*.ts"],
+    //migrations: ["src/migrations/**/*.ts"],
     migrationsRun: false,
     migrationsTableName: "migrations",
     migrationsTransactionMode: "all",

@@ -38,8 +38,15 @@ export class UserController {
     tags: ['Users'],
   })
   @UseBefore(OperationMiddleware("user.view"))
-  async getAll(@QueryParam("filters") filters: string, @QueryParam("relations") relations: string) {
-    const users = await this.userService.getAllUsers(filters, relations);
+    async getAll(   
+                    @QueryParam("filters") filters?: string,
+                    @QueryParam("relations") relations?: string,
+                    @QueryParam("pageNumber") pageNumber?: number,
+                    @QueryParam("pageSize") pageSize?: number,
+                    @QueryParam("includeTotal") includeTotal?: boolean
+                )
+  {
+    const users = await this.userService.getAllUsers({filters, relations, pageNumber, pageSize, includeTotal});
 
     if (!users.success) {
       const error: ApiResponse<ErrorApi[]> = {

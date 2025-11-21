@@ -6,6 +6,7 @@ import { ApiResponseWithErrors } from "@/entities/response/api-response";
 import { ExpedientResponse } from "@/entities/response/expedient-response";
 import { ExpedientRepository } from "@/repository/expedient-repository";
 import { TraceabilityRepository } from "@/repository/traceability-repository";
+import { QueryParamsRequest } from "@/types/types/types.common";
 import { ExpedientValidations } from "@/validations/expedient-validators/expedient-validations";
 import { inject, injectable } from "inversify";
 import { $ZodIssue } from "zod/v4/core/errors.cjs";
@@ -21,13 +22,13 @@ export class ExpedientService {
     ) { }
 
 
-    async getAllExpedients(filters: string, relations: string): Promise<ApiResponseWithErrors<ExpedientResponse[]>> {
-        const expedients = await this.expedientRepository.findAll(filters, relations);
+    async getAllExpedients({filters, relations, pageNumber = 1, pageSize = 10, includeTotal = false} : QueryParamsRequest): Promise<ApiResponseWithErrors<ExpedientResponse[]>> {
+        const expedients = await this.expedientRepository.findAll({filters, relations, pageNumber, pageSize, includeTotal});
         return {
-            data: expedients.map(expedient => this.mapper.Map(expedient, "ExpedientToResponse")),
+            data: expedients.data.map(expedient => this.mapper.Map(expedient, "ExpedientToResponse")),
             message: 'Expedientes obtenidos exitosamente',
             success: true,
-            totalResults: expedients.length,
+            totalResults: expedients.totalResults,
             Error: [],
         };
     }

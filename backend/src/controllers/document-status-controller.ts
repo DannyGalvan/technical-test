@@ -23,15 +23,22 @@ export class DocumentStatusController {
         description: 'Retorna una lista de todos los estados de documento registrados',
         tags: ['DocumentStatuses'],
     })
-    async getAll(@QueryParam("filters") filters: string, @QueryParam("relations") relations: string) {
-        const documentStatuses = await this.documentStatusService.getAllDocumentStatuses(filters, relations);
+    async getAll(   
+                    @QueryParam("filters") filters?: string,
+                    @QueryParam("relations") relations?: string,
+                    @QueryParam("pageNumber") pageNumber?: number,
+                    @QueryParam("pageSize") pageSize?: number,
+                    @QueryParam("includeTotal") includeTotal?: boolean
+                )
+    {
+        const documentStatuses = await this.documentStatusService.getAllDocumentStatuses({filters, relations, pageNumber, pageSize, includeTotal});
 
         if (!documentStatuses.success) {
             const error: ApiResponse<ErrorApi[]> = {
                 success: false,
                 message: documentStatuses.message,
                 data: documentStatuses.Error,
-                totalResults: 0,
+                totalResults: documentStatuses.totalResults,
             };
 
             return error;

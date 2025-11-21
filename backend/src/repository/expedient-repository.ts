@@ -1,6 +1,8 @@
 import { TYPES } from "@/config/container-types";
 import { Expedient } from "@/entities/models/expedient";
 import { ExpedientItem } from "@/entities/models/expedient-item";
+import { ApiResponse } from "@/entities/response/api-response";
+import { QueryParamsRequest } from "@/types/types/types.common";
 import { FilterTranslator } from "@/utils/filter-translator";
 import { RelationLoader } from "@/utils/relation-loader";
 import { inject, injectable } from "inversify";
@@ -21,11 +23,33 @@ export class ExpedientRepository {
         this.items = this.dataSource.getRepository(ExpedientItem);
     }
 
-    async findAll(filters: string, relations: string): Promise<Expedient[]> {
+    async findAll({filters, relations, pageNumber = 1, pageSize = 10, includeTotal = false} : QueryParamsRequest): Promise<ApiResponse<Expedient[]>> {
         const qb = this.repository.createQueryBuilder("expedient");
         this.filterTranslator.applyFilter(qb, "expedient", filters);
         this.relationLoader.applyRelations(qb, "expedient", relations);
-        return qb.getMany();
+
+        qb.orderBy("expedient.id", "DESC");
+
+        const skip = (pageNumber - 1) * pageSize;
+        const pagedData = await qb.skip(skip).take(pageSize).getMany();
+
+        if (includeTotal) {
+            const [result, total] = await qb.getManyAndCount();
+            // You can return total count along with results if needed
+            return {
+                data: result,
+                totalResults: total,
+                message: "Expedients retrieved successfully",
+                success: true,
+            }
+        }
+
+        return {
+            data: pagedData,
+            message: "Expedients retrieved successfully",
+            success: true,
+            totalResults: skip + pagedData.length + (pagedData.length > pageSize ? 1 : 0), // Approximate total
+        };
     }
 
     async findById(id: number, relations: string): Promise<Expedient | null> {

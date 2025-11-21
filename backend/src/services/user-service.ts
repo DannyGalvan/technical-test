@@ -6,6 +6,7 @@ import { UserRequest } from "@/entities/request/user-request";
 import { ApiResponseWithErrors } from "@/entities/response/api-response";
 import { UserResponse } from "@/entities/response/user-response";
 import { UserRepository } from "@/repository/user-repository";
+import { QueryParamsRequest } from "@/types/types/types.common";
 import { UserValidations } from "@/validations/user-validators/user-validations";
 import { injectable, inject } from "inversify";
 import { $ZodIssue } from "zod/v4/core/errors.cjs";
@@ -19,13 +20,13 @@ export class UserService {
     @inject(TYPES.UserValidations) private userValidations: UserValidations,
   ) { }
 
-  async getAllUsers(filters: string, relations: string): Promise<ApiResponseWithErrors<UserResponse[]>> {
-    const users = await this.userRepository.findAll(filters, relations);
+  async getAllUsers({filters, relations, pageNumber = 1, pageSize = 10, includeTotal = false} : QueryParamsRequest): Promise<ApiResponseWithErrors<UserResponse[]>> {
+    const users = await this.userRepository.findAll({filters, relations, pageNumber, pageSize, includeTotal});
     return {
-      data: users.map(user => this.mapper.Map(user, "UserToResponse")),
+      data: users.data.map(user => this.mapper.Map(user, "UserToResponse")),
       message: 'Usuarios obtenidos exitosamente',
-      success: true,
-      totalResults: users.length,
+      success: users.success,
+      totalResults: users.totalResults,
       Error: [],
     }
   }

@@ -14,5 +14,29 @@ services:
       - mssql-data:/var/opt/mssql # Persist data in a named volume
     restart: unless-stopped # Restart the container unless explicitly stopped
 
+  app:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: mp-backend
+    environment:
+      - PORT=3000
+      - RATE_TIME_LIMIT=15
+      - RATE_REQUEST_LIMIT=100
+      - DB_HOST=mssql
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_PASSWORD=Galvan2483 # Ensure this matches the SA_PASSWORD above
+      - DB_NAME=mp # Replace with your actual database name
+      - JWT_SECRET=tu-super-secreto-en-produccion
+      - JWT_EXPIRES_IN=7d
+      - CORS_ORIGIN=*
+      - NODE_ENV=production
+    ports:
+      - "3000:3000" # Maps host port 3000 to container port 3000
+    depends_on:
+      - mssql # Ensure the database starts before the app
+    restart: unless-stopped # Restart the container unless explicitly stopped
+
 volumes:
   mssql-data: # Define the named volume for data persistence

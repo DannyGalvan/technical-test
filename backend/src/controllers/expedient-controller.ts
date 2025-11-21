@@ -8,6 +8,7 @@ import { AuthMiddleware } from "@/middleware/auth-middleware";
 import { OperationMiddleware } from "@/middleware/operation-middleware";
 import { ExpedientService } from "@/services/expedient-service";
 import { JWTPayload } from "@/services/jwt-service";
+import { QueryParamsRequest } from "@/types/types/types.common";
 import { inject, injectable } from "inversify";
 import { Body, Get, JsonController, Param, Post, Put, QueryParam, UseBefore } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
@@ -21,15 +22,22 @@ export class ExpedientController {
         @inject(TYPES.ExpedientService) private expedientService: ExpedientService
     ) { }
 
-    @Get('/')
+    @Get('')
     @OpenAPI({
         summary: 'Obtener todos los expedientes',
         description: 'Retorna una lista de todos los expedientes registrados',
         tags: ['Expedients'],
     })
     @UseBefore(OperationMiddleware("evidence.view"))
-    async getAll(@QueryParam("filters") filters: string, @QueryParam("relations") relations: string) {
-        const expedients = await this.expedientService.getAllExpedients(filters, relations);
+    async getAll(   
+                    @QueryParam("filters") filters?: string,
+                    @QueryParam("relations") relations?: string,
+                    @QueryParam("pageNumber") pageNumber?: number,
+                    @QueryParam("pageSize") pageSize?: number,
+                    @QueryParam("includeTotal") includeTotal?: boolean
+                )
+    {
+        const expedients = await this.expedientService.getAllExpedients({filters, relations, pageNumber, pageSize, includeTotal});
 
         if (!expedients.success) {
             const error: ApiResponse<ErrorApi[]> = {
