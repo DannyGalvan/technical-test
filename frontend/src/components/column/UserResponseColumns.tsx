@@ -1,0 +1,70 @@
+import type { TableColumnWithFilters } from "../../types/TableColumnWithFilters";
+import type { UserResponse } from "../../types/UserResponse";
+import { UserButton } from "../button/UserButton";
+
+export const UserResponseColumns: TableColumnWithFilters<UserResponse>[] = [
+  {
+    id: "id",
+    name: "ID",
+    selector: (data) => data.id ?? "",
+    sortable: true,
+    wrap: true,
+    omit: false,
+    hasFilter: true,
+    filterField: (value) => (value ? `id:eq:${value}` : ""),
+  },
+  {
+    id: "name",
+    name: "Nombre",
+    selector: (data) => data.name ?? "",
+    sortable: true,
+    wrap: true,
+    omit: false,
+    hasFilter: true,
+    filterField: (value) => (value ? `name:like:${value}` : ""),
+  },
+  {
+    id: "email",
+    name: "Correo Electrónico",
+    selector: (data) => data.email ?? "",
+    sortable: true,
+    wrap: true,
+    omit: false,
+    hasFilter: true,
+    filterField: (value) => (value ? `email:like:${value}` : ""),
+  },
+  {
+    id: "rol",
+    name: "Rol",
+    selector: (data) => data.rol?.name ?? "",
+    sortable: true,
+    wrap: true,
+    omit: false,
+    hasFilter: true,
+    filterField: (value) => (value ? `rol.name:like:${value}` : ""),
+  },
+  {
+    id: "actions",
+    name: "Acciones",
+    maxWidth: "100px",
+    center: true,
+    button: true,
+    cell: (data) => <UserButton data={data} />,
+  },
+  {
+    id: "createdAt",
+    name: "Creado",
+    selector: (data) => data.createdAt ?? "",
+    sortable: true,
+    maxWidth: "160px",
+    omit: true,
+  },
+  {
+    id: "updatedAt",
+    name: "Actualizado",
+    selector: (data) => data.updatedAt ?? "",
+    sortable: true,
+    maxWidth: "160px",
+    omit: true,
+  },
+];

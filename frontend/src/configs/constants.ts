@@ -1,4 +1,6 @@
 import type { InitialAuth } from "../types/InitialAuth";
+import type { RolRequest } from "../types/RolRequest";
+import type { UserRequest } from "../types/UserRequest";
 
 export const URL_BASE = "";
 export const API_URL = `${URL_BASE}/api`;
@@ -12,12 +14,14 @@ export const nameRoutes = {
   changePassword: "/change-password",
   settings: "/change-password",
   evidence: "/evidences",
+  user: "/users",
   root: "/",
   notFound: "*",
   forbidden: "/forbidden",
   unauthorized: "/unauthorized",
   error: "/error",
   create: "create",
+  edit: "update",
   authorize: "authorize",
 };
 
@@ -55,4 +59,20 @@ export const AUTHORIZATION_STATES = {
   pendient: 1,
   authorized: 2,
   rejected: 3,
+};
+
+export const initialUser: UserRequest = {
+  id: undefined,
+  rolId: 0,
+  name: "",
+  email: "",
+  password: "",
+  state: true,
+};
+
+export const rol: RolRequest = {
+  id: 0,
+  name: "",
+  description: "",
+  state: true,
 };

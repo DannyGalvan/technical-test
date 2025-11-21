@@ -5,6 +5,7 @@ import { Root } from "../containers/Root";
 import { ErrorRoutes } from "../routes/ErrorRoutes";
 import { EvidenceRoutes } from "../routes/EvidenceRoutes";
 import { PublicRoutes } from "../routes/PublicRoutes";
+import { UserRoutes } from "../routes/UserRoutes";
 import { useAuth } from "./useAuth";
 
 export const useAuthorizationRoutes = () => {
@@ -19,7 +20,7 @@ export const useAuthorizationRoutes = () => {
     {
       path: nameRoutes.root,
       element: <Root />,
-      children: [...PublicRoutes, ...ErrorRoutes],
+      children: [...PublicRoutes, ...ErrorRoutes, ...UserRoutes],
     },
   ]);
 

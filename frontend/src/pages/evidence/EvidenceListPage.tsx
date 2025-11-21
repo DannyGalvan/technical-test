@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { EvidenceResponseColumns } from "../../components/columns/EvidenceResponseColumns";
+import { EvidenceResponseColumns } from "../../components/column/EvidenceResponseColumns";
 import RequestModal from "../../components/modal/RequestModal";
 import { TableServer } from "../../components/table/TableServer";
 import { useAuth } from "../../hooks/useAuth";
